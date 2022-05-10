@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SecureDocuments.ConsoleUtils": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}

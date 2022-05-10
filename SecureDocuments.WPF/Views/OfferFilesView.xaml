@@ -1,0 +1,337 @@
+﻿<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.WPF.Views.OfferFilesView"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    x:TypeArguments="vm:OfferFilesViewModel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    d:DataContext="{d:DesignInstance Type=vm:OfferFilesViewModel}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    d:Width="1000"
+    d:Height="600"
+    mc:Ignorable="d">
+
+    <materialDesign:Card
+        Padding="5"
+        Margin="15"
+        materialDesign:ShadowAssist.ShadowDepth="Depth5"
+        UniformCornerRadius="15">
+
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BorderBrush="LightBlue"
+                    BorderThickness="0"
+                    CornerRadius="5">
+                    <DockPanel
+                        LastChildFill="True">
+                        <StackPanel
+                            Orientation="Horizontal"
+                            VerticalAlignment="Stretch">
+                            <Button
+                                Margin="10 0"
+                                x:Name="UploadFiles"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                        Kind="Upload"
+                                        Height="24"
+                                        Width="24"
+                                        Margin="0,0,5,0" />
+                                    <TextBlock Text="Upload files" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Margin="10 0"
+                                x:Name="DownloadFiles"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                        Kind="Download"
+                                        Height="24"
+                                        Width="24"
+                                        Margin="0,0,5,0" />
+                                    <TextBlock Text="Download files" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Margin="10 0"
+                                x:Name="SyncFiles"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                        Kind="Sync"
+                                        Height="24"
+                                        Width="24"
+                                        Margin="0,0,5,0" />
+                                    <TextBlock Text="Sync" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Margin="10 0"
+                                x:Name="OpenFilesFolder"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                        Kind="OpenInNew"
+                                        Height="24"
+                                        Width="24"
+                                        Margin="0,0,5,0" />
+                                    <TextBlock Text="Open Folder" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <TextBlock
+                            x:Name="OfferFilesTitleText"
+                            Text="Offer files"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" />
+                    </DockPanel>
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0 10"
+                    BorderBrush="LightBlue"
+                    BorderThickness="0"
+                    CornerRadius="5">
+
+                    <DockPanel
+                        LastChildFill="True"
+                        VerticalAlignment="Center">
+
+                        <materialDesign:PackIcon
+                            Kind="Search"
+                            Foreground="{Binding ElementName=SearchTextBox, Path=BorderBrush}"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Margin="10 0" />
+
+                        <TextBox
+                            x:Name="SearchTextBox"
+                            materialDesign:HintAssist.Hint="Serach"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            Margin="0 0 10 0" />
+                    </DockPanel>
+                </Border>
+
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BorderBrush="LightBlue"
+                    BorderThickness="0"
+                    CornerRadius="5"
+                    Margin="0 10">
+                    <ComboBox
+                        Margin="10 0"
+                        x:Name="FileCategoriesComboBox"
+                        DisplayMemberPath="Display"
+                        SelectedValuePath="Item" />
+                </Border>
+            </Grid>
+
+            <ListView
+                Margin="15 0 15 15"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                SelectionMode="Extended"
+                HorizontalContentAlignment="Stretch"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                x:Name="OfferFilesListView">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="IsSelected" Value="{Binding Path=Selected, Mode=TwoWay}" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon
+                                Grid.Column="0"
+                                Width="50"
+                                Height="50"
+                                Kind="{Binding FileDetails.ExtIcon}"
+                                Foreground="CornflowerBlue"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" />
+                            <Border
+                                Grid.Column="1"
+                                Margin="10"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Width="40"
+                                Height="40"
+                                BorderThickness="1"
+                                CornerRadius="50,50,50,50"
+                                BorderBrush="Black"
+                                Background="{Binding FileDetails.CategoryColor}" />
+
+                            <StackPanel
+                                Grid.Column="2"
+                                Margin="5">
+                                <TextBlock
+                                    FontStyle="Normal"
+                                    FontWeight="Bold"
+                                    FontSize="20"
+                                    Text="{Binding FileDetails.NameExt}"
+                                    HorizontalAlignment="Center" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Content="Category: "
+                                            VerticalAlignment="Center" />
+                                        <TextBlock
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Text="{Binding FileDetails.Category}"
+                                            VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Row="1"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Content="Size: "
+                                            VerticalAlignment="Center" />
+                                        <TextBlock
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Text="{Binding FileDetails.ReadableSize}"
+                                            VerticalAlignment="Center" />
+                                    </StackPanel>
+
+                                    <StackPanel
+                                        Grid.Column="2"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Content="Audience: "
+                                            VerticalAlignment="Center" />
+                                        <TextBlock
+                                            Padding="0,0,25,0"
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Text="{Binding FileDetails.Role}"
+                                            TextWrapping="NoWrap"
+                                            TextTrimming="CharacterEllipsis"
+                                            VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel
+                                        Grid.Column="2"
+                                        Grid.Row="1"
+                                        Orientation="Horizontal">
+                                        <Label
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Content="Tags: "
+                                            VerticalAlignment="Center" />
+                                        <TextBlock
+                                            Padding="0,0,25,0"
+                                            FontStyle="Normal"
+                                            FontWeight="Normal"
+                                            Text="{Binding FileDetails.TagsInLine}"
+                                            TextWrapping="NoWrap"
+                                            TextTrimming="CharacterEllipsis"
+                                            VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="3"
+                                Margin="5">
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Command="{Binding ShowOpenPopupCommand}"
+                                    CommandParameter="{Binding FileDetails}"
+                                    ToolTip="MaterialDesignFlatButton">
+                                    Open
+                                </Button>
+                                <Button
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Command="{Binding ShowRemovePopupCommand}"
+                                    CommandParameter="{Binding FileDetails}"
+                                    ToolTip="MaterialDesignFlatButton">
+                                    Remove
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </materialDesign:Card>
+
+</rxui:ReactiveUserControl>

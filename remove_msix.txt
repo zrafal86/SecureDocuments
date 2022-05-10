@@ -1,0 +1,5 @@
+6e1b7caa-8eee-4eca-a3d5-e60e18f2aa1e_0.9.10.0_x64__ymyqyqxzjp5jj
+
+Get-AppxPackage -name 6e1b7caa-8eee-4eca-a3d5-e60e18f2aa1e -AllUsers
+
+Remove-AppxPackage -package 6e1b7caa-8eee-4eca-a3d5-e60e18f2aa1e_0.9.10.0_x64__ymyqyqxzjp5jj -AllUsers

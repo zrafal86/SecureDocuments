@@ -1,0 +1,209 @@
+﻿<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.WPF.Views.ProfileView"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    x:TypeArguments="vm:ProfileViewModel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    d:DataContext="{d:DesignInstance Type=vm:ProfileViewModel}"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    mc:Ignorable="d"
+    d:DesignHeight="800" d:DesignWidth="1200">
+    <materialDesign:Card
+        Padding="5"
+        Margin="15"
+        materialDesign:ShadowAssist.ShadowDepth="Depth5"
+        UniformCornerRadius="15">
+
+        <Grid
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card
+                Padding="32"
+                Margin="16"
+                Grid.Row="0"
+                Grid.Column="0"
+                materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                UniformCornerRadius="15"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*" />
+                        <ColumnDefinition Width="0.9*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0 15 0 0"
+                        Style="{DynamicResource MaterialDesignTitleTextBlock}"
+                        FontSize="16"
+                        VerticalAlignment="Top">
+                        Changed your credentials:
+                    </TextBlock>
+
+                    <materialDesign:PackIcon
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Kind="Email"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="15"
+                        x:Name="UserEmail"
+                        Content="zrafal86@gmail.com"
+                        HorizontalAlignment="Left" />
+
+                    <materialDesign:PackIcon
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Kind="Key"
+                        Foreground="{Binding ElementName=CurrentPassword, Path=BorderBrush}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" />
+
+                    <PasswordBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="15"
+                        x:Name="CurrentPassword"
+                        materialDesign:HintAssist.Hint="Current password"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:HintAssist.HelperText="At least 5 characters" />
+
+                    <materialDesign:PackIcon
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Kind="Key"
+                        Foreground="{Binding ElementName=NewPassword, Path=BorderBrush}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" />
+
+                    <PasswordBox
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="15"
+                        x:Name="NewPassword"
+                        materialDesign:HintAssist.Hint="New password"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:HintAssist.HelperText="At least 5 characters" />
+
+                    <Button
+                        x:Name="UpdatePasswordButton"
+                        Grid.Row="4"
+                        Grid.ColumnSpan="2"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}">
+                        Changed password
+                    </Button>
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card
+                Padding="32"
+                Margin="16"
+                Grid.Row="0"
+                Grid.Column="1"
+                materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                UniformCornerRadius="15"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*" />
+                        <ColumnDefinition Width="0.6*" />
+                        <ColumnDefinition Width="0.3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0 15 0 0"
+                        Style="{DynamicResource MaterialDesignTitleTextBlock}"
+                        FontSize="16"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Top">
+                        Changed your theme:
+                    </TextBlock>
+
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,15,15,15"
+                        Content="Is dark"
+                        Visibility="Collapsed"
+                        HorizontalAlignment="Left" />
+
+                    <ToggleButton
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Visibility="Collapsed"
+                        Style="{StaticResource MaterialDesignSwitchLightToggleButton}"
+                        ToolTip="MaterialDesignSwitchLightToggleButton"
+                        x:Name="ToggleDarkMode" />
+
+
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0 15 0 0"
+                        Style="{DynamicResource MaterialDesignTitleTextBlock}"
+                        FontSize="16"
+                        VerticalAlignment="Top">
+                        Notification:
+                    </TextBlock>
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0,15,15,15"
+                        Content="Enable notification"
+                        HorizontalAlignment="Left" />
+
+                    <ToggleButton
+                        Grid.Row="3"
+                        Grid.Column="2"
+                        Style="{StaticResource MaterialDesignSwitchLightToggleButton}"
+                        ToolTip="MaterialDesignSwitchLightToggleButton"
+                        x:Name="ToggleNotification" />
+                </Grid>
+
+            </materialDesign:Card>
+
+        </Grid>
+
+    </materialDesign:Card>
+
+</rxui:ReactiveUserControl>

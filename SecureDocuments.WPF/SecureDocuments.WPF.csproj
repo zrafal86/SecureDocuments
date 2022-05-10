@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<LangVersion>Latest</LangVersion>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+		<StartupObject>SecureDocuments.WPF.App</StartupObject>
+		<PackageIcon>Resources\icon.png</PackageIcon>
+		<ApplicationIcon>Icon.ico</ApplicationIcon>
+		<PublishSingleFile>false</PublishSingleFile>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<UserSecretsId>d618a29b-9d05-47e4-bb21-b411f4ced5f4</UserSecretsId>
+		<SignAssembly>false</SignAssembly>
+		<Platforms>x64;x86</Platforms>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<FileVersion>0.9.8</FileVersion>
+		<AssemblyVersion>0.9.8</AssemblyVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="Icon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MaterialDesignColors" Version="2.0.6" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+		<PackageReference Include="MaterialDesignThemes.Wpf" Version="1.0.1" />
+		<PackageReference Include="Microsoft.AppCenter.Analytics" Version="4.5.1" />
+		<PackageReference Include="Microsoft.AppCenter.Crashes" Version="4.5.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+		<PackageReference Include="ReactiveMarbles.ObservableEvents.SourceGenerator" Version="1.1.4">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ReactiveUI" Version="18.0.10" />
+		<PackageReference Include="ReactiveUI.Events.WPF" Version="15.1.1" />
+		<PackageReference Include="ReactiveUI.Fody" Version="18.0.10" />
+		<PackageReference Include="ReactiveUI.WPF" Version="18.0.10" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="Splat.Serilog" Version="14.2.8" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SecureDocuments\SecureDocuments.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+		<None Update="Resources\icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.en.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.pl-PL.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,181 @@
+{
+  "Users": [
+    {
+      "firstName": "admin",
+      "lastName": "admin",
+      "email": "admin@admin.pl",
+      "password_hash": "d5vgdiidbo7lX25TlllyYwyAQ8UC1HUq0oyfkdUrrWE=",
+      "role": 0
+    }
+  ],
+  "EmailNotification": {
+    "Port": 587,
+    "Host": "x.pl",
+    "CredentialUserName": "infoapp@x.pl",
+    "CredentialPassword": "pass",
+    "EnableSsl": true,
+    "Timeout": 20000,
+    "From": "infoapp@x.pl"
+  },
+  "CompanyNames" : 
+  [
+    {
+      "Name": "first company"
+    },
+    {
+      "Name": "second company"
+    }
+  ],
+  "CustomerCountries" : [
+    {
+      "Id": 1,
+      "ShortName": "Antigua and Barbuda",
+      "OfficialName": "Antigua and Barbuda",
+      "ISO2": "AG"
+    },
+    {
+      "Id": 2,
+      "ShortName": "Bahamas",
+      "OfficialName": "the Commonwealth of the Bahamas",
+      "ISO2": "BS"
+    },    
+    {
+      "Id": 3,
+      "ShortName": "Belgium",
+      "OfficialName": "the Kingdom of Belgium",
+      "ISO2": "BE"
+    },
+    {
+      "Id": 4,
+      "ShortName": "Canada",
+      "OfficialName": "Canada",
+      "ISO2": "CA"
+    },
+    {
+      "Id": 5,
+      "ShortName": "Cook Islands",
+      "OfficialName": "the Cook Islands",
+      "ISO2": "CK"
+    },
+    {
+      "Id": 6,
+      "ShortName": "Curaçao",
+      "OfficialName": "Land Curaçao",
+      "ISO2": "CW"
+    },
+    {
+      "Id": 7,
+      "ShortName": "Cyprus",
+      "OfficialName": "the Republic of Cyprus",
+      "ISO2": "CY"
+    },
+    {
+      "Id": 8,
+      "ShortName": "Denmark",
+      "OfficialName": "the Kingdom of Denmark",
+      "ISO2": "DK"
+    },
+    {
+      "Id": 9,
+      "ShortName": "Faroe Islands",
+      "OfficialName": "the Faroe Islands",
+      "ISO2": "FO"
+    },
+    {
+      "Id": 10,
+      "ShortName": "Finland",
+      "OfficialName": "the Republic of Finland",
+      "ISO2": "FI"
+    },
+    {
+      "Id": 11,
+      "ShortName": "Germany",
+      "OfficialName": "the Federal Republic of Germany",
+      "ISO2": "DE"
+    },
+    {
+      "Id": 12,
+      "ShortName": "Gibraltar",
+      "OfficialName": "Gibraltar",
+      "ISO2": "GI"
+    },
+    {
+      "Id": 13,
+      "ShortName": "Greenland",
+      "OfficialName": "Greenland",
+      "ISO2": "GL"
+    },
+    {
+      "Id": 14,
+      "ShortName": "Iceland",
+      "OfficialName": "the Republic of Iceland",
+      "ISO2": "IS"
+    },
+    {
+      "Id": 15,
+      "ShortName": "Ireland",
+      "OfficialName": "Ireland",
+      "ISO2": "IE"
+    },
+    {
+      "Id": 16,
+      "ShortName": "Malta",
+      "OfficialName": "the Republic of Malta",
+      "ISO2": "MT"
+    },
+    {
+      "Id": 17,
+      "ShortName": "Netherlands",
+      "OfficialName": "the Kingdom of the Netherlands",
+      "ISO2": "NL"
+    },
+    {
+      "Id": 18,
+      "ShortName": "Norway",
+      "OfficialName": "the Kingdom of Norway",
+      "ISO2": "NO"
+    },
+    {
+      "Id": 19,
+      "ShortName": "Poland",
+      "OfficialName": "the Republic of Poland",
+      "ISO2": "PL"
+    },
+    {
+      "Id": 20,
+      "ShortName": "Russian Federation",
+      "OfficialName": "the Russian Federation",
+      "ISO2": "RU"
+    },
+    {
+      "Id": 21,
+      "ShortName": "Saint Vincent and the Grenadines",
+      "OfficialName": "Saint Vincent and the Grenadines",
+      "ISO2": "VC"
+    },
+    {
+      "Id": 22,
+      "ShortName": "Sweden",
+      "OfficialName": "the Kingdom of Sweden",
+      "ISO2": "SE"
+    },
+    {
+      "Id": 23,
+      "ShortName": "Thailand",
+      "OfficialName": "the Kingdom of Thailand",
+      "ISO2": "TH"
+    },
+    {
+      "Id": 24,
+      "ShortName": "United Kingdom",
+      "OfficialName": "the United Kingdom of Great Britain and Northern Ireland",
+      "ISO2": "GB"
+    },
+    {
+      "Id": 25,
+      "ShortName": "Vanuatu",
+      "OfficialName": "the Republic of Vanuatu",
+      "ISO2": "VU"
+    }
+  ]
+}

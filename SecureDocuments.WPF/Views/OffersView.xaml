@@ -1,0 +1,706 @@
+﻿<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.WPF.Views.OffersView"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    x:TypeArguments="vm:OffersViewModel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    d:DataContext="{d:DesignInstance Type=vm:OffersViewModel}"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    d:Width="1700"
+    d:Height="800"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GridSplitter
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Width="4">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid>
+                        <Button Content="⁞" />
+                        <Rectangle Fill="LightGray" />
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
+
+        <materialDesign:Card
+            Padding="5"
+            Margin="15"
+            materialDesign:ShadowAssist.ShadowDepth="Depth5"
+            UniformCornerRadius="15">
+            <Grid Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Border
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        BorderBrush="BlueViolet"
+                        BorderThickness="0"
+                        CornerRadius="5">
+                        <DockPanel
+                            LastChildFill="True">
+
+                            <Button
+                                x:Name="AddOfferButton"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignRaisedLightButton}">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                        Kind="Add"
+                                        Height="24"
+                                        Width="24"
+                                        Margin="0,0,5,0" />
+                                    <TextBlock Text="Add offer" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Margin="10 0"
+                                x:Name="ExportOffersButton"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="Export to excel file">
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                                    <materialDesign:PackIcon
+                                        Kind="Export"
+                                        Height="24"
+                                        Width="24"
+                                        Margin="0,0,5,0" />
+                                    <TextBlock Text="Export offers" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Margin="10 0"
+                                x:Name="RefreshOffersButton"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                ToolTip="Refresh offers">
+
+                                <materialDesign:PackIcon
+                                            Kind="Refresh"
+                                            Height="24"
+                                            Width="24" />
+                            </Button>
+                            
+                            <TextBlock Text="Offers"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center" />
+                        </DockPanel>
+                    </Border>
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0 10"
+                        BorderBrush="BlueViolet"
+                        BorderThickness="0"
+                        CornerRadius="5">
+                        <DockPanel
+                            LastChildFill="True"
+                            VerticalAlignment="Center">
+
+                            <materialDesign:PackIcon
+                                Kind="Search"
+                                Foreground="{Binding ElementName=SearchTextBox, Path=BorderBrush}"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="10 0" />
+
+                            <TextBox
+                                x:Name="SearchTextBox"
+                                materialDesign:HintAssist.Hint="Serach"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Margin="0 0 10 0" />
+                        </DockPanel>
+                    </Border>
+
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        BorderBrush="BlueViolet"
+                        BorderThickness="0"
+                        CornerRadius="5"
+                        Margin="0 10">
+                        <ComboBox
+                            Margin="10 0"
+                            x:Name="StatusComboBox"
+                            DisplayMemberPath="Display"
+                            SelectedValuePath="Item" />
+                    </Border>
+                </Grid>
+
+                <ListView
+                    Margin="15 0 15 15"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    SelectionMode="Single"
+                    x:Name="OffersListView">
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="True">
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Name}"
+                                Header="Name" />
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Manager.FullName}"
+                                Header="Manager" />
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Status}"
+                                Header="Status" />
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding Type}"
+                                Header="Type" />
+                            <GridViewColumn
+                                DisplayMemberBinding="{Binding CreatedTime, StringFormat='yyyy/MM/dd - HH:mm'}"
+                                Header="Created" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            x:Name="DetailsPanel"
+            Padding="5"
+            Margin="15"
+            materialDesign:ShadowAssist.ShadowDepth="Depth5"
+            UniformCornerRadius="15">
+            <ScrollViewer>
+                <Border
+                    BorderBrush="BlueViolet"
+                    BorderThickness="0"
+                    CornerRadius="5">
+
+                    <Grid
+                        Margin="15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BorderBrush="BlueViolet"
+                            BorderThickness="0"
+                            CornerRadius="5">
+
+                            <DockPanel LastChildFill="True">
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                        Margin="10 0"
+                                        x:Name="CloseDetailsPanelButton"
+                                        HorizontalAlignment="Right"
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        ToolTip="Close the details panel">
+
+                                        <materialDesign:PackIcon
+                                            Kind="Close"
+                                            Height="24"
+                                            Width="24" />
+                                    </Button>
+                                    <Button
+                                        x:Name="AddOfferFileButton"
+                                        HorizontalAlignment="Right"
+                                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        ToolTip="Manage the files of the offer">
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                            <materialDesign:PackIcon
+                                                Kind="Files"
+                                                Height="24"
+                                                Width="24"
+                                                Margin="0,0,5,0" />
+                                            <TextBlock Text="Files" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button
+                                        Margin="10 0"
+                                        x:Name="AddInvoicesFileButton"
+                                        HorizontalAlignment="Right"
+                                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        ToolTip="Manage the invoices">
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                            <materialDesign:PackIcon
+                                                Kind="Money"
+                                                Height="24"
+                                                Width="24"
+                                                Margin="0,0,5,0" />
+                                            <TextBlock Text="Invoices" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                                <TextBlock
+                                    Text="Offer detail"
+                                    FontSize="18"
+                                    FontWeight="Bold"
+                                    Margin="15, 0, 15, 0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" />
+
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                                    <Button
+                                        x:Name="AcceptButton"
+                                        Margin="6,0,0,0"
+                                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        Width="100"
+                                        ToolTip="Accept offer">
+                                        Accept
+                                    </Button>
+                                    <Button
+                                        x:Name="RejectButton"
+                                        Margin="6,0,0,0"
+                                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        Width="100"
+                                        ToolTip="Reject offer">
+                                        Reject
+                                    </Button>
+                                    <Button
+                                        x:Name="FinishButton"
+                                        Margin="6,0,0,0"
+                                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        Width="100"
+                                        ToolTip="Finish offer">
+                                        Finish
+                                    </Button>
+                                    <Button
+                                        x:Name="ArchiveButton"
+                                        Margin="6,0,0,0"
+                                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        Width="100"
+                                        ToolTip="Archive offer">
+                                        Archive
+                                    </Button>
+                                </StackPanel>
+                            </DockPanel>
+                        </Border>
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="15"
+                            BorderBrush="Blue"
+                            BorderThickness="0"
+                            CornerRadius="5">
+                            
+                            <Grid x:Name="DetailsPanelForm">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="0.6*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <!--form-->
+                                <TextBox
+                                    Margin="5"
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    x:Name="OfferNumber"
+                                    materialDesign:HintAssist.Hint="Offer number"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    VerticalAlignment="Center" />
+
+                                <TextBlock
+                                    Margin="5"
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=CompanyNameComboBox, Path=BorderBrush}"
+                                    Text="Company name:"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    x:Name="CompanyNameComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <TextBox
+                                    Margin="5"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    x:Name="OfferName"
+                                    materialDesign:HintAssist.Hint="Project Name"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    Margin="5"
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    x:Name="CustomerName"
+                                    materialDesign:HintAssist.Hint="Customer name"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    Margin="5"
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    x:Name="CustomerAddress"
+                                    materialDesign:HintAssist.Hint="Customer Address"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    VerticalAlignment="Center" />
+
+                                <DockPanel
+                                    Grid.Row="4"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    LastChildFill="True">
+
+                                    <Label
+                                        Margin="5"
+                                        Grid.Column="0"
+                                        Foreground="{Binding ElementName=TypeComboBox, Path=BorderBrush}"
+                                        Content="Customer Country:" />
+                                    <ComboBox
+                                        Margin="5"
+                                        Grid.Column="1"
+                                        x:Name="CustomerCountryComboBox"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Item" />
+
+                                </DockPanel>
+
+                                <DockPanel
+                                    Grid.Row="5"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    LastChildFill="True">
+
+                                    <Label
+                                        Margin="5"
+                                        Grid.Column="0"
+                                        Foreground="{Binding ElementName=TypeComboBox, Path=BorderBrush}"
+                                        Content="Ship's flag:" />
+                                    <ComboBox
+                                        Margin="5"
+                                        Grid.Column="1"
+                                        x:Name="UnitFlagComboBox"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Item" />
+
+                                </DockPanel>
+
+                                <TextBlock
+                                    Margin="5"
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=TypeComboBox, Path=BorderBrush}"
+                                    Text="Type:"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="1"
+                                    Grid.Column="3"
+                                    x:Name="TypeComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <TextBlock
+                                    Margin="5"
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=SubjectComboBox, Path=BorderBrush}"
+                                    Text="Subject:"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    x:Name="SubjectComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <TextBlock
+                                    x:Name="ApplicantLabel"
+                                    Margin="5"
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=ApplicantComboBox, Path=BorderBrush}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Text="Applicant:" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="3"
+                                    Grid.Column="3"
+                                    x:Name="ApplicantComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <TextBlock
+                                    Margin="5"
+                                    Grid.Row="4"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=ManagerComboBox, Path=BorderBrush}"
+                                    Text="Manager:"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="4"
+                                    Grid.Column="3"
+                                    x:Name="ManagerComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <TextBlock
+                                    Margin="5"
+                                    Grid.Row="5"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=BuilderComboBox, Path=BorderBrush}"
+                                    Text="Builder:"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="5"
+                                    Grid.Column="3"
+                                    x:Name="BuilderComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <TextBlock
+                                    Margin="5"
+                                    Grid.Row="6"
+                                    Grid.Column="2"
+                                    Foreground="{Binding ElementName=TechnologistComboBox, Path=BorderBrush}"
+                                    Text="Technologist:"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+                                <ComboBox
+                                    Margin="5"
+                                    Grid.Row="6"
+                                    Grid.Column="3"
+                                    x:Name="TechnologistComboBox"
+                                    DisplayMemberPath="Display"
+                                    SelectedValuePath="Item" />
+
+                                <DatePicker
+                                    Grid.Row="6"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5"
+                                    x:Name="StartDate"
+                                    materialDesign:HintAssist.Hint="Start date"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+                                <DatePicker
+                                    Grid.Row="8"
+                                    Grid.Column="2"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5"
+                                    x:Name="EndDate"
+                                    materialDesign:HintAssist.Hint="Real end date"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+                                <DatePicker
+                                    Grid.Row="7"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5"
+                                    x:Name="EstimatedEndDate"
+                                    materialDesign:HintAssist.Hint="Estimated end date"
+                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+                                <Grid
+                                    x:Name="InitialGrossAmountParent"
+                                    Grid.Row="7"
+                                    Grid.Column="2"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox
+                                        Grid.Column="0"
+                                        x:Name="InitialGrossAmount"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        VerticalAlignment="Center"
+                                        InputScope="Digits"
+                                        materialDesign:TextFieldAssist.HasClearButton="True">
+                                        <materialDesign:HintAssist.Hint>
+                                            <StackPanel Orientation="Horizontal">
+                                                <materialDesign:PackIcon Kind="Information" />
+                                                <TextBlock Text="Estimated amount" />
+                                            </StackPanel>
+                                        </materialDesign:HintAssist.Hint>
+                                    </TextBox>
+                                    <ComboBox 
+                                        Grid.Column="1"
+                                        x:Name="CurrencyComboBox"
+                                        Margin="10 0 0 0"
+                                        Width="50" Height="40"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        DisplayMemberPath="Display"
+                                        SelectedValuePath="Item"/>
+                                </Grid>
+
+                                <materialDesign:PackIcon
+                                    Grid.Row="9"
+                                    Grid.Column="0"
+                                    Kind="Pencil"
+                                    Foreground="{Binding ElementName=OfferDescription, Path=BorderBrush}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    Grid.Row="9"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="5"
+                                    x:Name="OfferDescription"
+                                    TextWrapping="Wrap"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Visible"
+                                    materialDesign:HintAssist.Hint="Offer description"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                                <materialDesign:PackIcon
+                                    Grid.Row="10"
+                                    Grid.Column="0"
+                                    Kind="Pencil"
+                                    Foreground="{Binding ElementName=CustomerDescription, Path=BorderBrush}"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    Grid.Row="10"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="3"
+                                    Margin="5"
+                                    x:Name="CustomerDescription"
+                                    TextWrapping="Wrap"
+                                    AcceptsReturn="True"
+                                    VerticalScrollBarVisibility="Visible"
+                                    materialDesign:HintAssist.Hint="Customer description"
+                                    materialDesign:TextFieldAssist.HasClearButton="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+
+                                <!--form-->
+                                <DockPanel
+                                    Grid.Row="11"
+                                    Grid.Column="1"
+                                    Grid.ColumnSpan="2"
+                                    Margin="5"
+                                    LastChildFill="True"
+                                    VerticalAlignment="Stretch">
+
+                                    <Label
+                                        VerticalAlignment="Center"
+                                        Content="Accepted date: " />
+
+                                    <Label
+                                        VerticalAlignment="Center"
+                                        x:Name="AcceptedDate"/>
+                                </DockPanel>
+
+                                <Button
+                                    Grid.Row="11"
+                                    Grid.ColumnSpan="4"
+                                    Margin="15"
+                                    x:Name="SaveOfferFileButton"
+                                    HorizontalAlignment="Right"
+                                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    ToolTip="Save the current offer">
+                                    <StackPanel
+                                            Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+                                        <materialDesign:PackIcon
+                                                Kind="ContentSave"
+                                                Height="24"
+                                                Width="24"
+                                                Margin="0,0,5,0" />
+                                        <TextBlock Text="Save" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </ScrollViewer>
+        </materialDesign:Card>
+    </Grid>
+</rxui:ReactiveUserControl>

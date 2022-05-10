@@ -1,0 +1,15 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Globalization;
+global using System.IO;
+global using System.Linq;
+global using System.Reactive;
+global using System.Reactive.Disposables;
+global using System.Reactive.Linq;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Input;
+global using System.Windows.Markup;
+global using System.Windows.Threading;
