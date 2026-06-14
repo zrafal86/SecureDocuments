@@ -1,0 +1,128 @@
+<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.Avalonia.Views.NewOfferView"
+    x:TypeArguments="vm:NewOfferViewModel"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
+
+    <ScrollViewer>
+        <Border
+            Padding="20"
+            Margin="15"
+            CornerRadius="15"
+            Classes="Card"
+            BoxShadow="0 4 14 2 #33000000"
+            HorizontalAlignment="Stretch">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Row="0" Grid.ColumnSpan="2"
+                    Margin="0,0,0,16"
+                    FontSize="16" FontWeight="SemiBold"
+                    Text="New offer" />
+
+                <icons:MaterialIcon Grid.Row="1" Grid.Column="0"
+                    Kind="Pencil" Width="20" Height="20"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <TextBox
+                    Grid.Row="1" Grid.Column="1"
+                    Margin="0,6"
+                    x:Name="OfferName"
+                    Watermark="Project name" />
+
+                <TextBlock
+                    Grid.Row="2" Grid.Column="0"
+                    Margin="0,0,8,0"
+                    Text="Type:"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox
+                    Grid.Row="2" Grid.Column="1"
+                    Margin="0,6"
+                    x:Name="TypeComboBox"
+                    HorizontalAlignment="Stretch" />
+
+                <TextBlock
+                    Grid.Row="3" Grid.Column="0"
+                    Margin="0,0,8,0"
+                    Text="Manager:"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" />
+                <ComboBox
+                    Grid.Row="3" Grid.Column="1"
+                    Margin="0,6"
+                    x:Name="ManagerComboBox"
+                    HorizontalAlignment="Stretch" />
+
+                <icons:MaterialIcon Grid.Row="4" Grid.Column="0"
+                    Kind="Pencil" Width="20" Height="20"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <TextBox
+                    Grid.Row="4" Grid.Column="1"
+                    Margin="0,6"
+                    x:Name="OfferDescription"
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"
+                    MinHeight="60"
+                    Watermark="Offer description" />
+
+                <icons:MaterialIcon Grid.Row="5" Grid.Column="0"
+                    Kind="Pencil" Width="20" Height="20"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <TextBox
+                    Grid.Row="5" Grid.Column="1"
+                    Margin="0,6"
+                    x:Name="CustomerName"
+                    Watermark="Customer name" />
+
+                <icons:MaterialIcon Grid.Row="6" Grid.Column="0"
+                    Kind="Pencil" Width="20" Height="20"
+                    HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                <TextBox
+                    Grid.Row="6" Grid.Column="1"
+                    Margin="0,6"
+                    x:Name="CustomerDescription"
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"
+                    MinHeight="60"
+                    Watermark="Customer description" />
+
+                <Grid Grid.Row="7" Grid.ColumnSpan="2" Margin="0,12,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        x:Name="AddButton"
+                        Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        Classes="Raised"
+                        Width="100"
+                        Content="Add" />
+                    <Button
+                        x:Name="CancelButton"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Classes="Outlined"
+                        Width="100"
+                        Content="Cancel" />
+                </Grid>
+            </Grid>
+        </Border>
+    </ScrollViewer>
+</rxui:ReactiveUserControl>

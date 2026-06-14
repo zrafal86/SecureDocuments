@@ -1,0 +1,108 @@
+<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.Avalonia.Views.LoginView"
+    x:TypeArguments="vm:LoginViewModel"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
+
+    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border
+            Padding="32"
+            Margin="16"
+            Width="500"
+            Height="530"
+            CornerRadius="15"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Classes="Card"
+            BoxShadow="0 8 20 2 #44000000">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.9*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+                    <Grid Margin="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox
+                            x:Name="ApplicationDirectory"
+                            Grid.Column="0"
+                            Watermark="Application folder path"
+                            VerticalAlignment="Center" />
+
+                        <Button
+                            x:Name="ChooseAppDirButton"
+                            Grid.Column="1"
+                            Classes="Icon"
+                            ToolTip.Tip="Indicate the application folder">
+                            <icons:MaterialIcon Kind="FolderOpen" Width="25" Height="25" />
+                        </Button>
+                    </Grid>
+
+                    <TextBlock
+                        Margin="0,15,0,0"
+                        FontSize="16"
+                        Text="Type your credentials"
+                        VerticalAlignment="Center" />
+                </StackPanel>
+
+                <icons:MaterialIcon
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Kind="Email"
+                    Width="20" Height="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center" />
+
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="15"
+                    x:Name="UserEmail"
+                    Watermark="Email" />
+
+                <icons:MaterialIcon
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Kind="Key"
+                    Width="20" Height="20"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center" />
+
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="15"
+                    x:Name="Password"
+                    PasswordChar="•"
+                    Watermark="Password" />
+
+                <Button
+                    x:Name="LoginButton"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Classes="Raised"
+                    Width="100"
+                    Content="Login" />
+            </Grid>
+        </Border>
+    </Border>
+</rxui:ReactiveUserControl>

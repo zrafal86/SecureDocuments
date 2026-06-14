@@ -5,7 +5,7 @@ namespace SecureDocuments.WPF.Services
 {
     internal class FileChooser : IFileChooser
     {
-        public string[] ChooseFiles()
+        public Task<string[]> ChooseFilesAsync()
         {
             var dialog = new OpenFileDialog
             {
@@ -14,16 +14,16 @@ namespace SecureDocuments.WPF.Services
             };
             var result = dialog.ShowDialog();
             if (result == DialogResult.OK)
-                return dialog.FileNames;
-            return Array.Empty<string>();
+                return Task.FromResult(dialog.FileNames);
+            return Task.FromResult(Array.Empty<string>());
         }
 
-        public string ChooseFolder()
+        public Task<string> ChooseFolderAsync()
         {
             using var dialog = new FolderBrowserDialog();
             var result = dialog.ShowDialog();
-            if (result == DialogResult.OK) return dialog.SelectedPath;
-            return string.Empty;
+            if (result == DialogResult.OK) return Task.FromResult(dialog.SelectedPath);
+            return Task.FromResult(string.Empty);
         }
     }
 }

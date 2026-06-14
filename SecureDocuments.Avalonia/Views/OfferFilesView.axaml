@@ -1,0 +1,167 @@
+<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.Avalonia.Views.OfferFilesView"
+    x:TypeArguments="vm:OfferFilesViewModel"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
+
+    <Border
+        Padding="5"
+        Margin="15"
+        CornerRadius="15"
+        Classes="Card"
+        BoxShadow="0 4 14 2 #33000000">
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Toolbar -->
+            <DockPanel Grid.Row="0" LastChildFill="False">
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                    <Button x:Name="UploadFiles" Classes="Flat" Margin="0,0,4,0">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:MaterialIcon Kind="Upload" Width="20" Height="20" Margin="0,0,5,0" />
+                            <TextBlock Text="Upload files" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="DownloadFiles" Classes="Flat" Margin="4,0">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:MaterialIcon Kind="Download" Width="20" Height="20" Margin="0,0,5,0" />
+                            <TextBlock Text="Download files" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="SyncFiles" Classes="Flat" Margin="4,0">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:MaterialIcon Kind="Sync" Width="20" Height="20" Margin="0,0,5,0" />
+                            <TextBlock Text="Sync" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="OpenFilesFolder" Classes="Flat" Margin="4,0">
+                        <StackPanel Orientation="Horizontal">
+                            <icons:MaterialIcon Kind="OpenInNew" Width="20" Height="20" Margin="0,0,5,0" />
+                            <TextBlock Text="Open Folder" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <TextBlock
+                    x:Name="OfferFilesTitleText"
+                    Text="Offer files"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center"
+                    Margin="16,0,0,0" />
+            </DockPanel>
+
+            <!-- Search and filter -->
+            <Grid Grid.Row="1" Margin="0,8,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <icons:MaterialIcon Kind="Search" Width="20" Height="20" VerticalAlignment="Center" Margin="5,0" />
+                    <TextBox x:Name="SearchTextBox" Grid.Column="1" Watermark="Search" />
+                </Grid>
+                <ComboBox
+                    x:Name="FileCategoriesComboBox"
+                    Grid.Column="1"
+                    Margin="8,0,0,0"
+                    HorizontalAlignment="Stretch" />
+            </Grid>
+
+            <!-- Files list -->
+            <ListBox
+                Grid.Row="2"
+                Margin="0,8,0,0"
+                x:Name="OfferFilesListBox"
+                SelectionMode="Multiple">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <icons:MaterialIcon
+                                Grid.Column="0"
+                                Width="40" Height="40"
+                                Kind="{Binding FileDetails.ExtIcon}"
+                                Foreground="CornflowerBlue"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" />
+                            <Border
+                                Grid.Column="1"
+                                Margin="8"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Width="32" Height="32"
+                                CornerRadius="16"
+                                Background="{Binding FileDetails.CategoryColor}" />
+
+                            <StackPanel Grid.Column="2" Margin="4">
+                                <TextBlock
+                                    FontWeight="Bold"
+                                    FontSize="16"
+                                    Text="{Binding FileDetails.NameExt}"
+                                    HorizontalAlignment="Left" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Category: " />
+                                        <TextBlock Text="{Binding FileDetails.Category}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Size: " />
+                                        <TextBlock Text="{Binding FileDetails.ReadableSize}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal">
+                                        <TextBlock Text="Audience: " />
+                                        <TextBlock Text="{Binding FileDetails.Role}" TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                                        <TextBlock Text="Tags: " />
+                                        <TextBlock Text="{Binding FileDetails.TagsInLine}" TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="3" Margin="4">
+                                <Button
+                                    Classes="Flat"
+                                    Command="{Binding ShowOpenPopupCommand}"
+                                    CommandParameter="{Binding FileDetails}"
+                                    Content="Open" />
+                                <Button
+                                    Classes="Flat"
+                                    Command="{Binding ShowRemovePopupCommand}"
+                                    CommandParameter="{Binding FileDetails}"
+                                    Content="Remove" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </Border>
+</rxui:ReactiveUserControl>

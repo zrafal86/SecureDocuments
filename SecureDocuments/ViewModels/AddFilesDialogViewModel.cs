@@ -42,7 +42,7 @@ namespace SecureDocuments.ViewModels
 
         private async Task<Unit> ChooseFiles()
         {
-            var files = _fileChooser.ChooseFiles();
+            var files = await _fileChooser.ChooseFilesAsync();
             Files.Clear();
             Files.AddRange(files);
             return await Task.FromResult(Unit.Default);

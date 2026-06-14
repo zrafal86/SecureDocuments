@@ -154,7 +154,12 @@ namespace SecureDocuments.ViewModels
                 }
 
                 var destFolder = PathFactory.GetApplicationLocalFolderPath();
-                Process.Start("explorer.exe", destFolder);
+                if (OperatingSystem.IsWindows())
+                    Process.Start("explorer.exe", destFolder);
+                else if (OperatingSystem.IsMacOS())
+                    Process.Start("open", destFolder);
+                else
+                    Process.Start("xdg-open", destFolder);
             }
             catch (IOException e)
             {

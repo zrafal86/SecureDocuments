@@ -40,7 +40,7 @@ namespace SecureDocuments.ViewModels
                     this.Log().Error("Error!", exception);
                     await _dialogService.ShowDialog("", exception.Message, true);
                 });
-            ChooseAppDirCommand = ReactiveCommand.Create(SelectAppFolder);
+            ChooseAppDirCommand = ReactiveCommand.CreateFromTask(SelectAppFolderAsync);
         }
 
         public override string UrlPathSegment => "Login";
@@ -92,9 +92,9 @@ namespace SecureDocuments.ViewModels
             }
         }
 
-        private void SelectAppFolder()
+        private async Task SelectAppFolderAsync()
         {
-            var appFolder = _folderChooser.ChooseFolder();
+            var appFolder = await _folderChooser.ChooseFolderAsync();
             PathFactory.SetApplicationFolder(appFolder);
             _settings.ApplicationFolder = appFolder;
             ApplicationFolder = appFolder;

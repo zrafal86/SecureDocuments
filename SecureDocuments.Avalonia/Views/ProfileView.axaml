@@ -1,0 +1,128 @@
+<rxui:ReactiveUserControl
+    x:Class="SecureDocuments.Avalonia.Views.ProfileView"
+    x:TypeArguments="vm:ProfileViewModel"
+    xmlns:rxui="http://reactiveui.net"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:SecureDocuments.ViewModels;assembly=SecureDocuments"
+    xmlns:icons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
+
+    <Border
+        Padding="5"
+        Margin="15"
+        CornerRadius="15"
+        Classes="Card"
+        BoxShadow="0 4 14 2 #33000000">
+
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Change password panel -->
+            <Border
+                Padding="32"
+                Margin="16"
+                Grid.Column="0"
+                CornerRadius="15"
+                Classes="Card"
+                BoxShadow="0 4 14 2 #22000000">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0" Grid.ColumnSpan="2"
+                        Margin="0,0,0,12"
+                        FontSize="16" FontWeight="SemiBold"
+                        Text="Change your credentials" />
+
+                    <icons:MaterialIcon Grid.Row="1" Grid.Column="0"
+                        Kind="Email" Width="20" Height="20"
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBlock
+                        Grid.Row="1" Grid.Column="1"
+                        Margin="0,12,0,12"
+                        x:Name="UserEmailLabel"
+                        VerticalAlignment="Center" />
+
+                    <icons:MaterialIcon Grid.Row="2" Grid.Column="0"
+                        Kind="Key" Width="20" Height="20"
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBox
+                        Grid.Row="2" Grid.Column="1"
+                        Margin="0,8"
+                        x:Name="CurrentPassword"
+                        PasswordChar="•"
+                        Watermark="Current password" />
+
+                    <icons:MaterialIcon Grid.Row="3" Grid.Column="0"
+                        Kind="Key" Width="20" Height="20"
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <TextBox
+                        Grid.Row="3" Grid.Column="1"
+                        Margin="0,8"
+                        x:Name="NewPassword"
+                        PasswordChar="•"
+                        Watermark="New password" />
+
+                    <Button
+                        x:Name="UpdatePasswordButton"
+                        Grid.Row="4" Grid.ColumnSpan="2"
+                        Margin="0,8"
+                        HorizontalAlignment="Stretch"
+                        Classes="Raised"
+                        Content="Change password" />
+                </Grid>
+            </Border>
+
+            <!-- Notifications panel -->
+            <Border
+                Padding="32"
+                Margin="16"
+                Grid.Column="1"
+                CornerRadius="15"
+                Classes="Card"
+                BoxShadow="0 4 14 2 #22000000">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock
+                        Grid.Row="0" Grid.ColumnSpan="2"
+                        Margin="0,0,0,12"
+                        FontSize="16" FontWeight="SemiBold"
+                        Text="Notifications" />
+
+                    <TextBlock
+                        Grid.Row="1" Grid.Column="0"
+                        Margin="0,12,15,12"
+                        Text="Enable notification"
+                        VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        Grid.Row="1" Grid.Column="1"
+                        x:Name="ToggleNotification"
+                        VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</rxui:ReactiveUserControl>

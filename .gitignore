@@ -352,3 +352,4 @@ app_config.dtms
 .vscode/
 .sonarqube/
 *.exe
+.claude/

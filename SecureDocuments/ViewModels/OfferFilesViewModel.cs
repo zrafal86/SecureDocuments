@@ -414,7 +414,7 @@ namespace SecureDocuments.ViewModels
                     return await _fileService.DownloadFiles(downloadFilesParam);
                 });
                 _dialogService.Close(identifier);
-                RxApp.MainThreadScheduler.Schedule(() => Process.Start("explorer.exe", destFolder));
+                RxApp.MainThreadScheduler.Schedule(() => OpenFolder(destFolder));
                 return await Task.FromResult(Unit.Default);
             }
 
@@ -454,7 +454,17 @@ namespace SecureDocuments.ViewModels
         private void OpenFilesFolder()
         {
             var destFolder = PathFactory.GetDownloadDestinationFile(_purpose, _currentOffer);
-            Process.Start("explorer.exe", destFolder);
+            OpenFolder(destFolder);
+        }
+
+        private static void OpenFolder(string path)
+        {
+            if (OperatingSystem.IsWindows())
+                Process.Start("explorer.exe", path);
+            else if (OperatingSystem.IsMacOS())
+                Process.Start("open", path);
+            else
+                Process.Start("xdg-open", path);
         }
 
         private async Task<ImmutableArray<Result<string>>> SyncAllLocalFilesAction()
