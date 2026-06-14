@@ -19,7 +19,7 @@ namespace SecureDocuments.ConsoleUtils
             _config = config;
         }
 
-        public async Task Run(
+        public void Run(
             [Option("method", "method name to invoke.")]
             string method,
             [Option("e", "email")] string email,
@@ -34,15 +34,15 @@ namespace SecureDocuments.ConsoleUtils
             switch (method)
             {
                 case "add":
-                    await AddUser(firstName, lastName, email, password, role, path);
+                    AddUser(firstName, lastName, email, password, role, path).GetAwaiter().GetResult();
                     break;
 
                 case "changePass":
-                    await ChangePassword(email, password, path);
+                    ChangePassword(email, password, path).GetAwaiter().GetResult();
                     break;
 
                 case "del":
-                    await Remove(email, path);
+                    Remove(email, path).GetAwaiter().GetResult();
                     break;
 
                 default:
@@ -58,14 +58,20 @@ namespace SecureDocuments.ConsoleUtils
         {
             var source = new AppConfigSource(new AesEncryption { KeyProvider = new KeyProvider(new KeysFactory()) });
             var config = await source.Get(path);
-            var users = config?.Users;
-            var userList = users?.ToList();
+            var userList = config?.Users?.ToList();
             var user = userList?.Where(u => u.Email!.Equals(email)).FirstOrDefault();
             if (user is not null)
             {
                 userList?.Remove(user);
             }
-            await source.Save(config!, path);
+            var newConfig = new Models.AppConfig
+            {
+                Users = userList,
+                EmailNotification = config?.EmailNotification,
+                CompanyNames = config?.CompanyNames,
+                CustomerCountries = config?.CustomerCountries
+            };
+            await source.Save(newConfig, path);
         }
 
         private async Task AddUser(string firstName, string lastName, string email, string password, string role,
@@ -96,7 +102,9 @@ namespace SecureDocuments.ConsoleUtils
                 var newConfig = new Models.AppConfig
                 {
                     Users = usersList,
-                    EmailNotification = config?.EmailNotification
+                    EmailNotification = config?.EmailNotification,
+                    CompanyNames = config?.CompanyNames,
+                    CustomerCountries = config?.CustomerCountries
                 };
                 await source.Save(newConfig, path);
             }
@@ -129,7 +137,9 @@ namespace SecureDocuments.ConsoleUtils
                 var newConfig = new Models.AppConfig
                 {
                     Users = userList,
-                    EmailNotification = config?.EmailNotification
+                    EmailNotification = config?.EmailNotification,
+                    CompanyNames = config?.CompanyNames,
+                    CustomerCountries = config?.CustomerCountries
                 };
                 await source.Save(newConfig, path);
             }
